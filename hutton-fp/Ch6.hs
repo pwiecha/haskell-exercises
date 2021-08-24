@@ -97,7 +97,7 @@ take' n (x:xs) = x : take' (n-1) xs
 
 last' :: [a] -> a
 last' [] = error "empty list"
-last' (x:[]) = x
+last' [x] = x
 last' (x:xs) = last' xs
 
 unitTests :: IO ()
