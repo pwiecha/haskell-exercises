@@ -1,0 +1,5 @@
+--Newtype constructors can be used as functions:
+newtype Structure = Structure String
+
+somefunc :: String -> Structure
+somefunc = Structure . otherfunc "some_string"
