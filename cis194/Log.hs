@@ -3,7 +3,8 @@
 module Log
   (MessageType(..),
   LogMessage(..),
-  testParse,)
+  testParse,
+  testWhatWentWrong)
   where
 
 import Control.Applicative
