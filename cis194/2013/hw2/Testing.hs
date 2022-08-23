@@ -1,13 +1,9 @@
--- ghci Testing.hs -e unitTests
+-- ghci Testing.hs -e unitTests -i ../TestingBase.hs Log.hs LogAnalysis.hs
 module Testing where
 
+import TestingBase
 import LogAnalysis
 import Log
-
-asrt :: Bool -> IO ()
-asrt test =
-    if test then putStrLn "PASSED"
-    else putStrLn "FAILED"
 
 unitTests :: IO ()
 unitTests = do
