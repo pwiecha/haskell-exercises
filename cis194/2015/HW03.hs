@@ -83,10 +83,18 @@ desugar Skip = DSkip
 -- Exercise 4 -----------------------------------------
 
 evalSimple :: State -> DietStatement -> State
-evalSimple = undefined
+evalSimple st (DAssign var expr) = extend st var (evalE st expr)
+evalSimple st (DIf expr statementl statementr)
+  | evalE st expr > 0 = evalSimple st statementl
+  | otherwise = evalSimple st statementr
+evalSimple st (DWhile expr statement)
+  | evalE st expr > 0 = evalSimple (evalSimple st statement) (DWhile expr statement) -- upd st and eval again
+  | otherwise = st -- skip loop
+evalSimple st (DSequence statementl statementr) = evalSimple (evalSimple st statementl) statementr
+evalSimple st DSkip = st
 
 run :: State -> Statement -> State
-run = undefined
+run state statement = evalSimple state (desugar statement)
 
 -- Programs -------------------------------------------
 
